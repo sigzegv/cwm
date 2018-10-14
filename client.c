@@ -123,6 +123,7 @@ client_init(Window win, struct screen_ctx *sc, int active)
 	xu_ewmh_net_client_list(sc);
 	xu_ewmh_net_client_list_stacking(sc);
 	xu_ewmh_restore_net_wm_state(cc);
+	xu_ewmh_get_net_wm_window_type(cc);
 
 	if (client_get_wm_state(cc) == IconicState)
 		client_hide(cc);
@@ -442,6 +443,10 @@ client_resize(struct client_ctx *cc, int reset)
 void
 client_move(struct client_ctx *cc)
 {
+	if (cc->dock) {
+		return;
+	}
+
 	XMoveWindow(X_Dpy, cc->win, cc->geom.x, cc->geom.y);
 	client_config(cc);
 }

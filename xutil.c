@@ -478,6 +478,34 @@ xu_ewmh_set_net_wm_state(struct client_ctx *cc)
 }
 
 void
+xu_ewmh_get_net_wm_window_type(struct client_ctx *cc)
+{
+	Atom types, prop, da;
+	unsigned char *prop_out = NULL;
+	int di, status;
+	unsigned long dl;
+	char *an;
+
+	cc->dock = 0;
+	types = XInternAtom(X_Dpy, "_NET_WM_WINDOW_TYPE", True);
+	status = XGetWindowProperty(X_Dpy, cc->win, types, 0L, sizeof(Atom), False, XA_ATOM, &da, &di, &dl, &dl, &prop_out);
+
+	if (status == Success && prop_out) {
+        prop = ((Atom *)prop_out)[0];
+
+        an = XGetAtomName(X_Dpy, prop);
+
+		if (strcmp(an, "_NET_WM_WINDOW_TYPE_DOCK") == 0) {
+			cc->dock = 1;
+		}
+
+        if (an) {
+			XFree(an);
+		}
+    }
+}
+
+void
 xu_xorcolor(XftColor a, XftColor b, XftColor *r)
 {
 	r->pixel = a.pixel ^ b.pixel;

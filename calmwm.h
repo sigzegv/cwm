@@ -202,6 +202,7 @@ struct client_ctx {
 	char			*label;
 	XClassHint		ch;
 	XWMHints		*wmh;
+	int dock;
 };
 TAILQ_HEAD(client_q, client_ctx);
 
@@ -390,6 +391,7 @@ enum ewmh {
 	_NET_WM_DESKTOP,
 	_NET_CLOSE_WINDOW,
 	_NET_WM_STATE,
+	_NET_WM_WINDOW_TYPE,
 #define	_NET_WM_STATES_NITEMS	9
 	_NET_WM_STATE_STICKY,
 	_NET_WM_STATE_MAXIMIZED_VERT,
@@ -606,7 +608,7 @@ void 			 xu_ewmh_handle_net_wm_state_msg(struct client_ctx *,
 			     int, Atom , Atom);
 void 			 xu_ewmh_set_net_wm_state(struct client_ctx *);
 void 			 xu_ewmh_restore_net_wm_state(struct client_ctx *);
-
+void 			 xu_ewmh_get_net_wm_window_type(struct client_ctx *);
 char			*u_argv(char * const *);
 void			 u_exec(char *);
 void			 u_spawn(char *);

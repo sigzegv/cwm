@@ -3,6 +3,7 @@ Linux CWM improved
 What does this fork adds :
 * group-raise option (see man cwmrc): raise a group in front of other groups without hiding those.
 * fixes border transparenvy in some apps when using compton
+* do not be able to move docked windows
 
 ###
 This is a port of OpenBSD's excellent cwm[0] to Linux and other
