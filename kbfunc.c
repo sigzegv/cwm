@@ -443,6 +443,11 @@ kbfunc_group_only(void *ctx, struct cargs *cargs)
 }
 
 void
+kbfunc_group_raise(void *ctx, struct cargs *cargs)
+{
+	group_raise(ctx, cargs->flag);
+}
+void
 kbfunc_group_cycle(void *ctx, struct cargs *cargs)
 {
 	group_cycle(ctx, cargs->flag);
@@ -617,7 +622,7 @@ kbfunc_menu_exec(void *ctx, struct cargs *cargs)
 				/* lstat(2) in case d_type isn't supported. */
 				if (lstat(tpath, &sb) == -1)
 					continue;
-				if (!S_ISREG(sb.st_mode) && 
+				if (!S_ISREG(sb.st_mode) &&
 				    !S_ISLNK(sb.st_mode))
 					continue;
 			}
@@ -673,7 +678,7 @@ kbfunc_menu_ssh(void *ctx, struct cargs *cargs)
 		buf = lbuf;
 		if (buf[slen - 1] == '\n')
 			buf[slen - 1] = '\0';
-		
+
 		/* skip hashed hosts */
 		if (strncmp(buf, HASH_MARKER, strlen(HASH_MARKER)) == 0)
 			continue;

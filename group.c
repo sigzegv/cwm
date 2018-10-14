@@ -203,9 +203,7 @@ group_holds_only_hidden(struct group_ctx *gc)
 {
 	struct client_ctx	*cc;
 
-	TAILQ_FOREACH(cc, &gc->clientq, group_entry) {
-		if (!(cc->flags & (CLIENT_HIDDEN | CLIENT_STICKY)))
-			return(0);
+	TAILQ_FOREACH(cc, &gc->clientq, group_entry) { if (!(cc->flags & (CLIENT_HIDDEN | CLIENT_STICKY))) return(0);
 	}
 	return(1);
 }
@@ -246,6 +244,22 @@ group_only(struct screen_ctx *sc, int idx)
 			group_show(gc);
 		else
 			group_hide(gc);
+	}
+}
+
+void
+group_raise(struct screen_ctx *sc, int idx)
+{
+	struct group_ctx *gc;
+
+	if (idx < 0 || idx >= Conf.ngroups)
+		return;
+
+	TAILQ_FOREACH(gc, &sc->groupq, entry) {
+		if (gc->num == idx) {
+            group_show(gc);
+			break;
+        }
 	}
 }
 
