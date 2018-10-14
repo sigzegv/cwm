@@ -41,6 +41,7 @@ install: ${PROG}
 	install -m 755 cwm ${DESTDIR}${PREFIX}/bin
 	install -m 644 cwm.1 ${DESTDIR}${MANPREFIX}/man1
 	install -m 644 cwmrc.5 ${DESTDIR}${MANPREFIX}/man5
+	install -m 644 cwm.desktop ${DESTDIR}${PREFIX}/share/xsessions
 
 release:
 	VERSION=$$(git describe --tags | sed 's/^v//;s/-[^.]*$$//') && \
