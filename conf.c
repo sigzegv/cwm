@@ -472,8 +472,8 @@ conf_screen(struct screen_ctx *sc)
 				warnx("XftColorAllocValue: %s", Conf.color[i]);
 			break;
 		}
-		if (XftColorAllocName(X_Dpy, sc->visual, sc->colormap,
-		    Conf.color[i], &xc)) {
+		if (XftColorAllocName(X_Dpy, sc->visual, sc->colormap, Conf.color[i], &xc)) {
+            xc.pixel |= 0xFF000000;
 			sc->xftcolor[i] = xc;
 			XftColorFree(X_Dpy, sc->visual, sc->colormap, &xc);
 		} else {
@@ -625,7 +625,7 @@ conf_unbind_mouse(struct conf *c, struct bind_ctx *unbind)
 	struct bind_ctx		*mb = NULL, *mbnxt;
 
 	TAILQ_FOREACH_SAFE(mb, &c->mousebindq, entry, mbnxt) {
-		if ((unbind == NULL) || 
+		if ((unbind == NULL) ||
 		    ((mb->modmask == unbind->modmask) &&
 		     (mb->press.button == unbind->press.button))) {
 			TAILQ_REMOVE(&c->mousebindq, mb, entry);

@@ -3,7 +3,7 @@
 
 PROG=		cwm
 
-PREFIX?=	/usr/local
+PREFIX?=	/usr
 
 SRCS=		calmwm.c screen.c xmalloc.c client.c menu.c \
 		search.c util.c xutil.c conf.c xevents.c group.c \
