@@ -1,2 +1,2 @@
 xterm &
-exec ./cwm
+exec ./cwm -v

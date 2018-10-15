@@ -94,8 +94,11 @@ client_init(Window win, struct screen_ctx *sc, int active)
 	cc->dim.h = (cc->geom.h - cc->hint.baseh) / cc->hint.inch;
 	cc->ptr.x = cc->geom.w / 2;
 	cc->ptr.y = cc->geom.h / 2;
+    cc->dock = 0;
 
 	cc->colormap = wattr.colormap;
+
+	xu_ewmh_get_net_wm_window_type(cc);
 
 	if (wattr.map_state != IsViewable) {
 		client_placecalc(cc);
@@ -123,7 +126,6 @@ client_init(Window win, struct screen_ctx *sc, int active)
 	xu_ewmh_net_client_list(sc);
 	xu_ewmh_net_client_list_stacking(sc);
 	xu_ewmh_restore_net_wm_state(cc);
-	xu_ewmh_get_net_wm_window_type(cc);
 
 	if (client_get_wm_state(cc) == IconicState)
 		client_hide(cc);
@@ -228,7 +230,8 @@ client_setactive(struct client_ctx *cc)
 
 	cc->flags |= CLIENT_ACTIVE;
 	cc->flags &= ~CLIENT_URGENCY;
-	client_draw_border(cc);
+
+    client_draw_border(cc);
 	conf_grab_mouse(cc->win);
 	xu_ewmh_net_active_window(sc, cc->win);
 }
@@ -585,8 +588,8 @@ client_draw_border(struct client_ctx *cc)
 	if (cc->flags & CLIENT_URGENCY)
 		pixel = sc->xftcolor[CWM_COLOR_BORDER_URGENCY].pixel;
 
-	XSetWindowBorderWidth(X_Dpy, cc->win, (unsigned int)cc->bwidth);
-	XSetWindowBorder(X_Dpy, cc->win, pixel);
+    XSetWindowBorderWidth(X_Dpy, cc->win, (unsigned int)cc->bwidth);
+    XSetWindowBorder(X_Dpy, cc->win, pixel);
 }
 
 static void

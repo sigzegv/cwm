@@ -465,8 +465,9 @@ xev_handle_expose(XEvent *ee)
 
 	LOG_DEBUG3("window: 0x%lx", e->window);
 
-	if ((cc = client_find(e->window)) != NULL && e->count == 0)
+	if ((cc = client_find(e->window)) != NULL && e->count == 0) {
 		client_draw_border(cc);
+    }
 }
 
 void

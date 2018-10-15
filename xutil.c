@@ -486,7 +486,6 @@ xu_ewmh_get_net_wm_window_type(struct client_ctx *cc)
 	unsigned long dl;
 	char *an;
 
-	cc->dock = 0;
 	types = XInternAtom(X_Dpy, "_NET_WM_WINDOW_TYPE", True);
 	status = XGetWindowProperty(X_Dpy, cc->win, types, 0L, sizeof(Atom), False, XA_ATOM, &da, &di, &dl, &dl, &prop_out);
 
@@ -497,6 +496,7 @@ xu_ewmh_get_net_wm_window_type(struct client_ctx *cc)
 
 		if (strcmp(an, "_NET_WM_WINDOW_TYPE_DOCK") == 0) {
 			cc->dock = 1;
+            cc->bwidth = 0;
 		}
 
         if (an) {
