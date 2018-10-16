@@ -1,0 +1,31 @@
+borderwidth 3
+fontname "Source Code Pro Black:size=12:antialias=true"
+color activeborder "#FF1C1C"
+color inactiveborder "#1CFF1C"
+color menubg "#1C1C1C"
+color menufg "#1C1C1C"
+color font "#AAAAAA"
+color selfont "#FF5500"
+color urgencyborder "#FF5500"
+gap 28 0 0 0
+snapdist 10
+moveamount 5
+
+autogroup 2 termite,weechat
+autogroup 2 slack,Slack
+autogroup 2 discord,discord
+
+command xterm xterm
+
+unbind-key all
+bind-key 4-r        restart
+bind-key 4S-Return  menu-exec
+bind-key 4-space    menu-window
+bind-key 4M-space   menu-window-hidden
+bind-key M-x        window-delete
+bind-key MS-Next    window-hide
+bind-key M-m        window-maximize
+bind-key MS-m       window-vmaximize
+bind-key M-f        window-fullscreen
+bind-key M-Tab     window-cycle
+bind-key MS-Tab    window-rcycle
