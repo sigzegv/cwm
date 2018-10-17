@@ -1,7 +1,7 @@
 borderwidth 3
 fontname "Source Code Pro Black:size=12:antialias=true"
-color activeborder "#FF1C1C"
-color inactiveborder "#1CFF1C"
+color activeborder "#1CFF1C"
+color inactiveborder "#1C1C1C"
 color menubg "#1C1C1C"
 color menufg "#1C1C1C"
 color font "#AAAAAA"

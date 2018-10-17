@@ -1,2 +1,7 @@
+
+if [ -x /usr/bin/polybar ]; then
+    polybar -c ./polybarrc main &
+fi
+
 xterm &
 exec ./cwm -c ./cwmrc -v
