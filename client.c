@@ -726,11 +726,7 @@ client_cycle(struct screen_ctx *sc, int flags)
 	client_ptrsave(oldcc);
 	client_raise(prevcc);
 	client_raise(newcc);
-	if (!client_inbound(newcc, newcc->ptr.x, newcc->ptr.y)) {
-		newcc->ptr.x = newcc->geom.w / 2;
-		newcc->ptr.y = newcc->geom.h / 2;
-	}
-	client_ptrwarp(newcc);
+    client_setactive(newcc);
 }
 
 static struct client_ctx *
