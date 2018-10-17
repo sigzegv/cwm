@@ -94,7 +94,6 @@ client_init(Window win, struct screen_ctx *sc, int active)
 	cc->dim.h = (cc->geom.h - cc->hint.baseh) / cc->hint.inch;
 	cc->ptr.x = cc->geom.w / 2;
 	cc->ptr.y = cc->geom.h / 2;
-    cc->dock = 0;
 
 	cc->colormap = wattr.colormap;
 
@@ -446,7 +445,7 @@ client_resize(struct client_ctx *cc, int reset)
 void
 client_move(struct client_ctx *cc)
 {
-	if (cc->dock) {
+	if (cc->flags & CLIENT_DOCKED) {
 		return;
 	}
 
@@ -641,10 +640,11 @@ client_msg(struct client_ctx *cc, Atom proto, Time ts)
 void
 client_send_delete(struct client_ctx *cc)
 {
-	if (cc->flags & CLIENT_WM_DELETE_WINDOW)
+	if (cc->flags & CLIENT_WM_DELETE_WINDOW) {
 		client_msg(cc, cwmh[WM_DELETE_WINDOW], CurrentTime);
-	else
-		XKillClient(X_Dpy, cc->win);
+    } else if (!(cc->flags & CLIENT_DOCKED)) {
+        XKillClient(X_Dpy, cc->win);
+    }
 }
 
 void

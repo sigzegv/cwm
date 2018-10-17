@@ -15,17 +15,16 @@ autogroup 2 termite,weechat
 autogroup 2 slack,Slack
 autogroup 2 discord,discord
 
-command xterm xterm
-
 unbind-key all
-bind-key 4-r        restart
-bind-key 4S-Return  menu-exec
-bind-key 4-space    menu-window
-bind-key 4M-space   menu-window-hidden
+bind-key M-r        restart
+bind-key M-v        window-delete
+bind-key MS-Return  menu-exec
+bind-key M-space    menu-window
+bind-key MS-space   menu-window-hidden
 bind-key M-x        window-delete
 bind-key MS-Next    window-hide
 bind-key M-m        window-maximize
 bind-key MS-m       window-vmaximize
 bind-key M-f        window-fullscreen
-bind-key M-Tab     window-cycle
-bind-key MS-Tab    window-rcycle
+bind-key M-Tab      window-cycle
+bind-key MS-Tab     window-rcycle

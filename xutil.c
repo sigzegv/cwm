@@ -495,9 +495,8 @@ xu_ewmh_get_net_wm_window_type(struct client_ctx *cc)
         an = XGetAtomName(X_Dpy, prop);
 
 		if (strcmp(an, "_NET_WM_WINDOW_TYPE_DOCK") == 0) {
-			cc->dock = 1;
+            cc->flags |= CLIENT_DOCKED;
             cc->bwidth = 0;
-            cc->flags |= CLIENT_SKIP_CYCLE;
 		}
 
         if (an) {

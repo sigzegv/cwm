@@ -101,8 +101,9 @@ xev_handle_unmapnotify(XEvent *ee)
 		if (e->send_event) {
 			client_set_wm_state(cc, WithdrawnState);
 		} else {
-			if (!(cc->flags & CLIENT_HIDDEN))
+			if (!(cc->flags & CLIENT_HIDDEN) && !(cc->flags & CLIENT_DOCKED)) {
 				client_delete(cc);
+            }
 		}
 	}
 }
@@ -115,8 +116,9 @@ xev_handle_destroynotify(XEvent *ee)
 
 	LOG_DEBUG3("window: 0x%lx", e->window);
 
-	if ((cc = client_find(e->window)) != NULL)
+	if ((cc = client_find(e->window)) != NULL && !(cc->flags & CLIENT_DOCKED)) {
 		client_delete(cc);
+    }
 }
 
 static void
