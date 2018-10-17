@@ -708,9 +708,7 @@ client_cycle(struct screen_ctx *sc, int flags)
 		    client_next(newcc);
 
 		/* Only cycle visible and non-ignored windows. */
-		if ((newcc->flags & (CLIENT_SKIP_CYCLE)) ||
-		    ((flags & CWM_CYCLE_INGROUP) &&
-		    (newcc->gc != oldcc->gc)))
+		if ((newcc->flags & (CLIENT_SKIP_CYCLE)) || ((flags & CWM_CYCLE_INGROUP) && (newcc->gc != oldcc->gc)))
 			again = 1;
 
 		/* Is oldcc the only non-hidden window? */
